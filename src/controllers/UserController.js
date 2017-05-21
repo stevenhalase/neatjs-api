@@ -47,7 +47,15 @@ module.exports = {
      * UserController.create()
      */
     create: function (req, res) {
-        var User = new UserModel({			username : req.body.username,			firstname : req.body.firstname,			lastname : req.body.lastname,			email : req.body.email,			password : req.body.password,			roles : req.body.roles
+        var User = new UserModel({
+			username : req.body.username,
+			firstname : req.body.firstname,
+			lastname : req.body.lastname,
+			email : req.body.email,
+			password : req.body.password,
+			coverimage : req.body.coverimage,
+			profileimage : req.body.profileimage,
+			roles : req.body.roles
         });
 
         User.save(function (err, User) {
@@ -79,7 +87,15 @@ module.exports = {
                 });
             }
 
-            User.username = req.body.username ? req.body.username : User.username;			User.firstname = req.body.firstname ? req.body.firstname : User.firstname;			User.lastname = req.body.lastname ? req.body.lastname : User.lastname;			User.email = req.body.email ? req.body.email : User.email;			User.password = req.body.password ? req.body.password : User.password;			User.roles = req.body.roles ? req.body.roles : User.roles;			
+            User.username = req.body.username ? req.body.username : User.username;
+			User.firstname = req.body.firstname ? req.body.firstname : User.firstname;
+			User.lastname = req.body.lastname ? req.body.lastname : User.lastname;
+			User.email = req.body.email ? req.body.email : User.email;
+			User.password = req.body.password ? req.body.password : User.password;
+			User.coverimage = req.body.coverimage ? req.body.coverimage : User.coverimage;
+			User.profileimage = req.body.profileimage ? req.body.profileimage : User.profileimage;
+			User.roles = req.body.roles ? req.body.roles : User.roles;
+			
             User.save(function (err, User) {
                 if (err) {
                     return res.status(500).json({
