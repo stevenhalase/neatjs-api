@@ -3,7 +3,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const PostModel = require("../models/PostModel.js");
 module.exports = {
     list: function (req, res) {
-        PostModel.find(function (err, Posts) {
+        PostModel.find().populate('createdby modifiedby').exec(function (err, Posts) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting Post.',
+                    error: err
+                });
+            }
+            return res.json(Posts);
+        });
+    },
+    recent: function (req, res) {
+        PostModel.find().sort('-modifiedon').limit(10).populate('createdby modifiedby').exec(function (err, Posts) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting Post.',
+                    error: err
+                });
+            }
+            return res.json(Posts);
+        });
+    },
+    user: function (req, res) {
+        var id = req.params.id;
+        PostModel.find({ 'createdby': id }).sort('-modifiedon').limit(10).populate('createdby modifiedby').exec(function (err, Posts) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting Post.',
@@ -15,7 +38,7 @@ module.exports = {
     },
     show: function (req, res) {
         var id = req.params.id;
-        PostModel.findOne({ _id: id }, function (err, Post) {
+        PostModel.findOne({ _id: id }).populate('createdby modifiedby').exec(function (err, Post) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting Post.',

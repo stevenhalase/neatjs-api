@@ -4,6 +4,8 @@ const express = require("express");
 const PostController = require("../controllers/PostController.js");
 let router = express.Router();
 router.get('/', PostController.list);
+router.get('/recent', PostController.recent);
+router.get('/user/:id', PostController.user);
 router.get('/:id', PostController.show);
 router.post('/', PostController.create);
 router.put('/:id', PostController.update);

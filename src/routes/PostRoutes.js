@@ -10,6 +10,16 @@ router.get('/', PostController.list);
 /*
  * GET
  */
+router.get('/recent', PostController.recent);
+
+/*
+ * GET
+ */
+router.get('/user/:id', PostController.user);
+
+/*
+ * GET
+ */
 router.get('/:id', PostController.show);
 
 /*
